@@ -1,0 +1,26 @@
+<script src="https://unpkg.com/vue"></script>
+
+
+<div id="app">
+    <p>{{titulo}} {{novaInfo}}</p>
+    <button @click="alterar">Alterar</button>
+</div>
+<hr>
+
+
+<script>
+    const vm = new Vue({
+        el:"#app",
+        data:{
+            titulo:'Titulo 1',
+        },
+        methods: {
+            alterar(){
+                this.titulo += " ! ? "
+            }
+        },
+    })
+    //isso não deve ser criado pois esta varivel não sera inicializada dentro da instancia do vue, assim não sera monitorada pelo vue
+    vm.novaInfo = "nova info"
+    console.log(vm.novaInfo);
+</script>

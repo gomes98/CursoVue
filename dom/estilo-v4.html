@@ -1,0 +1,43 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<style>
+    .caixa{
+        display: flex;
+        justify-content: space-around;
+    }
+    .demo{
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+    }
+
+    .c1{
+        background-color: red;
+    }
+    .c2{
+        background-color: green;
+    }
+    .c3{
+        background-color: blue;
+    }
+</style>
+
+<div id="app">
+    <div class="caixa">
+        <div class="demo" :style="{'background-color': cor}"></div>
+        <div class="demo" ></div>
+        <div class="demo" ></div>        
+    </div>
+    <input type="text" v-model="cor">
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            cor: 'red'
+                    },
+        computed:{
+            
+        }
+    })
+</script>

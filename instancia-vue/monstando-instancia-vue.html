@@ -1,0 +1,41 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+
+<div id="app">
+
+</div>
+
+
+<script>
+    const vm = new Vue({
+        // el: "#app",
+        template: `
+        <div>
+            <h1>{{aula}}</h1>
+            <h2> {{modulo}} </h2>
+            <button @click="alterarAula" > Alterar Aula</button >
+            <button @click="alterarModulo" > Alterar Modulo</button >
+        </div>
+        `,
+        data: {
+            aula: "Montando instancia Vue",
+            modulo: "Modulo: instancia VUE"
+        },
+        methods: {
+            alterarAula() {
+                this.aula += " # "
+            },
+            alterarModulo() {
+                this.modulo += " # "
+            }
+        },
+    })
+    //funciona
+    // vm.$mount('#app')
+
+    // tambem funciona
+    vm.$mount()
+    document.querySelector('#app').appendChild(vm.$el)
+    
+</script>
