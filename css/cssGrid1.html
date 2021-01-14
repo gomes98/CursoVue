@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid 1</title>
+    <style>
+        html , body{
+            margin: 20px;
+            height: calc(100% - 40px);
+            background-color: lightgray;
+        }
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            border: solid 5px dodgerblue;
+            background: white;
+        }
+
+        body{
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-columns: repeat(4, 8.33% 8.33% 8.33%);
+            grid-template-columns: repeat(12, 8.33% );
+            /* o repeat pode ser usado combinado com outros valores */
+            grid-template-columns: repeat(11, 50px ) 100px;
+            /* 3 colunas uma fixa em px, uma em %, e uma pegando o resto */
+            grid-template-columns: 200px 20% 1fr;
+            /* estou dividindo a largura por 12 a 1ª coluna com 3 partes a 2ª com 6, e a 3ª com 3  */
+            grid-template-columns: 3fr 6fr 3fr;
+            /* aplicando em linhas */
+            grid-template-rows: 50% 25% 12.5% 12.5%;
+            /* 1ª linha fixa, 2ª linha com o resto que sobrou, 3 as outras somente com o tamanho do conteudo */
+            grid-template-rows: 100px 1fr;
+            /* 1ª linha definida e as outras dividem o que sobra */
+            grid-template-rows: 100px auto;
+        }
+
+        .d8{
+            /* coluna */
+            grid-column-start: 2;
+            grid-column-end: 4;
+            /* isso subistitui o codigo anterior */
+            grid-column-end: span 2;
+            /* linha */
+            grid-row-start: 3;
+            grid-row-end: 5;
+            /* isso subistitui o codigo anterior */
+            grid-row-end: span 2;
+        }
+
+        .d10, .d11{
+            /* usando nese formato pode haver sobreposição */
+            grid-column-start: 1;
+            grid-column-end: 3;
+            /* até aqui sem sobreposição */
+            grid-row-start: 5;
+            /* aqui houve sobreposição */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d1">1</div>
+    <div class="d2">2</div>
+    <div class="d3">3</div>
+    <div class="d4">4</div>
+    <div class="d5">5</div>
+    <div class="d6">6</div>
+    <div class="d7">7</div>
+    <div class="d8">8</div>
+    <div class="d9">9</div>
+    <div class="d10">10</div>
+    <div class="d11">11</div>
+    <div class="d12">12</div>
+</body>
+</html>

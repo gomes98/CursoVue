@@ -1,0 +1,51 @@
+<!-- aula 402 -->
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Box 3</title>
+</head>
+<style>
+    div {
+        border: solid 5px dodgerblue;
+        font-size: 40px;
+    }
+    
+    .flex-container div {
+        /* tamanho da caixa considera a borda */
+        box-sizing: border-box;
+    }
+
+    .flex-container{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .flex-container div{
+        /* tamanho do elemento no main-axis */
+        flex-basis: 100px; /*mais forte que o width:;*/
+        width: 200px; /* fraco perto do flex-basis */
+    }
+
+    .flex-container div:nth-child(4){
+        /* grow shrink basis */
+        flex: 3 6 100px;
+    }
+
+    .flex-container{
+        /* width: 200px; */
+    }
+    
+</style>
+
+<body>
+    <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+</body>
+
+</html>

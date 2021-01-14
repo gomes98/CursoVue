@@ -40,6 +40,26 @@
     
     .flex-container div {
         width: 100px;
+        flex-grow: 0;
+        /* este atributo pega o resto do espaco do elemento pai e divide entre os outros */
+        flex-grow: 1;
+    }
+    
+    .flex-container div:nth-child(1) {
+        /* aqui ele vai dividir o espaço por 4 pois tenho 3 elementos com o grow 1
+        e um elemento com com peso 2, assim este com 2 vai pegar duas partes do espaço que sobra */
+        flex-grow: 2;
+    }
+
+    .flex-container{
+        width: 200px;
+        /* este seletor é o oposto do grow, quando falta espaço o elemento com o maior numero
+        é mais compactado */
+        flex-shrink: 1;
+    }
+
+    .flex-container div:nth-child(1) {
+        flex-shrink:  5;
     }
 </style>
 
