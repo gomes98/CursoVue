@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+</head>
+
+<body>
+<div id="app">
+    <app-world />
+</div>
+<script>
+new Vue({
+    el:'#app',
+    components:{
+        'app-world': window.httpVueLoader('./Contador.vue')
+    }
+})
+</script>
+</body>
+
+</html>
