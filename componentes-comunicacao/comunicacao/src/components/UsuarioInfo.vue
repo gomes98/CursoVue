@@ -31,9 +31,10 @@ export default {
         }
     },
     created() {
-        bus.$on('idadeMudou', idade =>{
-            this.idade = idade
-        })
+        // bus.$on('idadeMudou', idade =>{
+        //     this.idade = idade
+        // })
+        bus.quandoIdadeMudar(idade =>{this.idade = idade})
     },
 }
 </script>
