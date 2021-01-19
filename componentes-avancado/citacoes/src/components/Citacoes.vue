@@ -2,14 +2,20 @@
     <div class="citacoes">
         <span>
             <button @click="numero--">&lt;</button>
-            <button @click="numero++">&gt;</button>
+            <button @click="numero++">&gt;</button> 
         </span>
         {{ numero }} {{ indice }}
+        <Citacao :texto="citacoes[indice].texto"/>
     </div>
 </template>
 
 <script>
+import Citacao from './Citacao.vue'
 export default {
+    components:{
+        Citacao
+    },
+    props:['texto'],
     data() {
         return {
             numero: 0,
