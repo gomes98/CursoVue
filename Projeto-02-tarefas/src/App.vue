@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Tarefas</h1>
+    <TaskProgress :progress="progress"/>
     <NewTask @taskAdded="addTask" />
     <TaskGrid 
 	:tasks="tasks" 
@@ -12,18 +13,33 @@
 <script>
 import TaskGrid from "./components/TaskGrid.vue";
 import NewTask from "./components/NewTask.vue";
+import TaskProgress from "./components/TaskProgress.vue";
 export default {
   components: {
     TaskGrid,
     NewTask,
+    TaskProgress,
+  },
+  computed:{
+    progress(){
+      const total = this.tasks.length
+      const done = this.tasks.filter(t => !t.pending).length
+      return Math.round(done / total * 100) || 0
+    }
   },
   data() {
     return {
       tasks: [
-        { name: "Lavar Louca", pending: true },
-        { name: "Comprar Ps5", pending: false },
       ],
     };
+  },
+  watch:{
+    tasks:{
+      deep :true,
+      handler(){
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
+      }
+    }
   },
   methods: {
     addTask(task) {
@@ -43,6 +59,10 @@ export default {
       this.tasks[i].pending = !this.tasks[i].pending;
     },
   },
+  created(){
+    const json = localStorage.getItem('tasks')
+    this.tasks = JSON.parse(json) || []
+  }
 };
 </script>
 
