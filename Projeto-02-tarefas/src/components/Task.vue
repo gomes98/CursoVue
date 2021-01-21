@@ -2,6 +2,19 @@
   <div class="task" :class="stateClass" @click="$emit('taskChanged', task)">
     <span @click.stop="$emit('taskDeleted', task)" class="close">x</span>
     <p>{{ task.name }}</p>
+    <span class="control" v-if="task.pending">
+      <img
+        @click.stop="$emit('taskStart', task)"
+        src="@/assets/play.svg"
+        alt="play"
+      />
+      <img
+        @click.stop="$emit('taskStop', task)"
+        src="@/assets/pause.svg"
+        alt="pause"
+      />
+    </span>
+    <span class="time">{{ start }} <br />{{ end }}</span>
   </div>
 </template>
 
@@ -16,6 +29,18 @@ export default {
         pending: this.task.pending,
         done: !this.task.pending,
       };
+    },
+    start() {
+      if(this.task.start == null){
+        return;
+      }
+      return new Date(this.task.start).toLocaleString();
+    },
+    end() {
+      if(this.task.stop == null){
+        return;
+      }
+      return new Date(this.task.stop).toLocaleString();
     },
   },
 };
@@ -34,6 +59,7 @@ export default {
   cursor: pointer;
   user-select: none;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -59,11 +85,36 @@ export default {
   right: 10px;
   top: 10px;
   font-size: 0.9rem;
-  font-weight:600;
+  font-weight: 600;
   height: 20px;
   width: 20px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
-} 
+}
+
+.control {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  height: 30px;
+  width: 50%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+.time {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  height: 30px;
+  width: 70%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
 </style>

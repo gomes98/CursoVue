@@ -7,6 +7,8 @@
           :task="task"
           @taskDeleted="$emit('taskDeleted1', i)"
           @taskChanged ="$emit('taskChanged', i)"
+          @taskStart ="$emit('taskStart', i)"
+          @taskStop ="$emit('taskStop', i)"
           ></Task>
       </template>
       <p v-else class="no-task">Sua vida Esta em dia ;)</p>
@@ -14,7 +16,7 @@
 </template>
 
 <script>
-import Task from './Task.vue'
+import Task from '@/components/Task.vue'
 export default {
     components:{Task},
 props:{

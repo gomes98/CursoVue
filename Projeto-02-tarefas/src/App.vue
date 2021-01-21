@@ -1,45 +1,50 @@
 <template>
   <div id="app">
+    <task-export :tasks="tasks" @novosTasks="upload"/>
     <h1>Tarefas</h1>
-    <TaskProgress :progress="progress"/>
+    <TaskProgress :progress="progress" />
     <NewTask @taskAdded="addTask" />
-    <TaskGrid 
-	:tasks="tasks" 
-	@taskDeleted1="deleteTask" 
-	@taskChanged="changeTask"/>
+    <TaskGrid
+      :tasks="tasks"
+      @taskDeleted1="deleteTask"
+      @taskChanged="changeTask"
+      @taskStart="startTask"
+      @taskStop="stopTask"
+    />
   </div>
 </template>
 
 <script>
-import TaskGrid from "./components/TaskGrid.vue";
-import NewTask from "./components/NewTask.vue";
-import TaskProgress from "./components/TaskProgress.vue";
+import TaskGrid from "@/components/TaskGrid.vue";
+import NewTask from "@/components/NewTask.vue";
+import TaskProgress from "@/components/TaskProgress.vue";
+import TaskExport from "@/components/TaskExport.vue";
 export default {
   components: {
     TaskGrid,
     NewTask,
     TaskProgress,
+    TaskExport
   },
-  computed:{
-    progress(){
-      const total = this.tasks.length
-      const done = this.tasks.filter(t => !t.pending).length
-      return Math.round(done / total * 100) || 0
-    }
+  computed: {
+    progress() {
+      const total = this.tasks.length;
+      const done = this.tasks.filter((t) => !t.pending).length;
+      return Math.round((done / total) * 100) || 0;
+    },
   },
   data() {
     return {
-      tasks: [
-      ],
+      tasks: [],
     };
   },
-  watch:{
-    tasks:{
-      deep :true,
-      handler(){
-        localStorage.setItem('tasks', JSON.stringify(this.tasks))
-      }
-    }
+  watch: {
+    tasks: {
+      deep: true,
+      handler() {
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      },
+    },
   },
   methods: {
     addTask(task) {
@@ -49,8 +54,27 @@ export default {
         this.tasks.push({
           name: task.name,
           pending: task.pending || true,
+          start: null,
+          stop: null
         });
       }
+    },
+    startTask(i) {
+      if(this.tasks[i].start != null){
+        return  
+      }
+      var data = new Date()
+      this.tasks[i].start = data
+    },
+    stopTask(i) {
+      // var data =  new Date()
+      // console.log(data.toLocaleString());
+      if(this.tasks[i].stop != null){
+        return  
+      }
+      var data =  new Date()
+      
+      this.tasks[i].stop = data
     },
     deleteTask(i) {
       this.tasks.splice(i, 1);
@@ -58,11 +82,16 @@ export default {
     changeTask(i) {
       this.tasks[i].pending = !this.tasks[i].pending;
     },
+    upload(i) {
+      i.forEach(element => {
+           this.tasks.push(element)
+      });
+    },
   },
-  created(){
-    const json = localStorage.getItem('tasks')
-    this.tasks = JSON.parse(json) || []
-  }
+  created() {
+    const json = localStorage.getItem("tasks");
+    this.tasks = JSON.parse(json) || [];
+  },
 };
 </script>
 
@@ -79,7 +108,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  
 }
 
 #app h1 {

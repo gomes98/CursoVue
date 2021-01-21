@@ -6,6 +6,7 @@
       @keydown.enter="add"
       class="form-element"
       placeholder="Nova tarefa?"
+      maxlength="18"
     />
     <button class="form-element" @click="add">+</button>
   </div>
