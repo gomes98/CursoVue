@@ -1,6 +1,49 @@
 <h1>Formulário</h1>
+<!-- instalar dependecias do server -->
+<!-- npm i --save express@4.16.3 body-parser@1.18.2 -E -->
+<!-- inicia o server -->
+<!-- node server.js -->
 
-<form action="http://localhost:3003/usuarios" method="POST">
+<form  method="GET">
+    <input type="hidden" name="id" value="3">
     <input type="text" name="nome">
-    <button>incluir</button>
+    <input type="password" name="senha" >
+    <textarea name="bio" cols="30" rows="10"></textarea>
+    <div>
+        <input type="radio" name="tipo" value="admin"> Admin
+        <input type="radio" name="tipo" value="regular"> Regular
+        <input type="radio" name="tipo" value="professor"> Professor        
+    </div>
+    <div>
+        <input type="checkbox" name="ativo">Ativo
+    </div>
+    <select name="estado" >
+        <option value="rs">Rio Grande do Sul</option>
+        <option value="sc">Santa Catarina</option>
+        <option value="pe">Parana</option>
+    </select>
+
+    <select name="intencao" multiple size="7">
+        <option value="js">JavaScript</option>
+        <option value="java">Java</option>
+        <option value="php">Php</option>
+        <option value="flutter">Flutter</option>
+    </select>
+
+    <button formaction="http://localhost:3003/usuarios" >incluir</button>
+    <button formaction="http://localhost:3003/usuarios/3"> Alterar</button>
 </form>
+
+<style>
+    input, 
+    textarea,
+    select{
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type=radio],
+    input[type=checkbox]{
+        display: inline;
+    }
+</style>
