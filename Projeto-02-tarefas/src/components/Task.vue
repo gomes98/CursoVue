@@ -14,7 +14,9 @@
         alt="pause"
       />
     </span>
-    <span class="time">{{ start }} <br />{{ end }}</span>
+    <span class="control" v-else> Tarefa Finalizada </span>
+    <span class="time" v-if="task.pending">{{ start }} <br />{{ end }}</span>
+    <span class="time" v-else>{{ dateDiff() }} </span>
   </div>
 </template>
 
@@ -22,6 +24,29 @@
 export default {
   props: {
     task: { type: Object, required: true },
+  },
+  methods: {
+    dateDiff() {
+      // pega o valor absoludo entre as datas
+      let diferenca = Math.abs(this.task.start -this.task.stop);
+      // contantes para calculo
+      const umDiaMS = 1000 * 60 * 60 * 24; // 86400000 ms tem em um dia
+      const umaHoraMS = 1000 * 60 * 60; // 3600000 ms em uma hora
+      const umaMinutosMS = 1000 * 60;
+      // operações envolvendo datas
+      let dias = Math.trunc(diferenca / umDiaMS);
+      let horas = Math.trunc((diferenca - dias * umDiaMS) / umaHoraMS);
+      let minutos = Math.trunc(
+        (diferenca - (dias * umDiaMS + horas * umaHoraMS)) / umaMinutosMS
+      );
+      let segundos = Math.trunc(
+        (diferenca -
+          (dias * umDiaMS + horas * umaHoraMS + minutos * umaMinutosMS)) /
+          1000
+      );
+      return `D:${dias} ${horas}:${minutos}:${segundos}`
+      // return { dias, horas, minutos, segundos };
+    },
   },
   computed: {
     stateClass() {
@@ -31,13 +56,13 @@ export default {
       };
     },
     start() {
-      if(this.task.start == null){
+      if (this.task.start == null) {
         return;
       }
       return new Date(this.task.start).toLocaleString();
     },
     end() {
-      if(this.task.stop == null){
+      if (this.task.stop == null) {
         return;
       }
       return new Date(this.task.stop).toLocaleString();

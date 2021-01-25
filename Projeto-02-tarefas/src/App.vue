@@ -60,18 +60,18 @@ export default {
       }
     },
     startTask(i) {
-      if(this.tasks[i].start != null){
-        return  
-      }
+      // if(this.tasks[i].start != null){
+      //   return  
+      // }
       var data = new Date()
       this.tasks[i].start = data
     },
     stopTask(i) {
       // var data =  new Date()
       // console.log(data.toLocaleString());
-      if(this.tasks[i].stop != null){
-        return  
-      }
+      // if(this.tasks[i].stop != null){
+      //   return  
+      // }
       var data =  new Date()
       
       this.tasks[i].stop = data
