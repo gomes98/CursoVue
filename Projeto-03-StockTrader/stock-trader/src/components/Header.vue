@@ -17,10 +17,10 @@
       <v-menu offset-y>
         <v-btn flat slot="activator">Salvar e Carregar</v-btn>
         <v-list>
-          <v-list-tile>
+          <v-list-tile @click="saveData">
             <v-list-tile-title>Salvar Dados</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile @click="loadDataLocal">
             <v-list-tile-title>Carregar Dados</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -43,9 +43,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['randomizeStock']),
+    ...mapActions(['randomizeStock', 'loadData']),
     endDay(){
       this.randomizeStock()
+    },
+    saveData(){
+      const { funds, stockPortfolio, stocks } = this.$store.getters
+      this.$http.put('stocks.json', { funds, stockPortfolio, stocks })
+    },
+    loadDataLocal(){
+      this.loadData()
     }
   },
 };
