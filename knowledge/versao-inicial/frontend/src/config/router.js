@@ -18,7 +18,7 @@ const routes = [{
     path: '/admin',
     component: AdminPages
 }, {
-    name: 'articlesByCategoru',
+    name: 'articlesByCategory',
     path: '/categories/:id/articles',
     component: ArticlesByCategory
 }, {
