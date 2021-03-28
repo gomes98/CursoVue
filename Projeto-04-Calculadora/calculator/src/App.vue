@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <h1>aha</h1>
+    <h1>Caluladora</h1>
+    <Calculator/>
   </div>
 </template>
 
 <script>
-export default {};
+import Calculator from './components/main/Calculator.vue';
+export default {
+  components: { Calculator },};
 </script>
 
 <style>
 body{
     margin: 0;
+     font-family: 'Roboto Mono';
+     
 }
 #app{
     display: flex;
